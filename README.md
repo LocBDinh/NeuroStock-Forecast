@@ -1,4 +1,4 @@
-# Stock Prediction Model
+# NeuroStock Forcast
 
 This is a stock prediction model built using the YahooFinance library. The model aims to predict the future price movements of stocks based on historical and real time data. Utilized _Long Short-Term Memory(LSTM)_ which is a _Recurrent Neural Network(RNN)_ architecture.
 
