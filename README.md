@@ -11,6 +11,8 @@ This is a stock prediction model built using the YahooFinance library. The model
  4. _Numpy_
  5. _Matplotlib_
  6. _Flask_
- 7. _Postman_
+
+#### To Test the Flask App 
+<a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/>
 
 
