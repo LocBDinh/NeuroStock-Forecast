@@ -1,3 +1,2 @@
 # Ignore .keras Model
-*.keras
-
+.keras
