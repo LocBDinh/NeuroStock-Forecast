@@ -10,5 +10,7 @@ This is a stock prediction model built using the YahooFinance library. The model
  3. _Pandas_
  4. _Numpy_
  5. _Matplotlib_
+ 6. _Flask_
+ 7. _Postman_
 
 

@@ -1,13 +1,13 @@
+from sklearn.preprocessing import MinMaxScaler
+from sklearn import metrics
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, LSTM
 import yfinance as yf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
-
-from sklearn.preprocessing import MinMaxScaler
-from sklearn import metrics
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM
+import tensorflow as tf
 
 # Prompt the user to enter the stock ticker
 ticker = input("Enter the stock ticker: ").upper()
@@ -26,7 +26,7 @@ print(data.tail())
 # Plot the adjusted close price
 stock = yf.Ticker(ticker)
 
-# Formatted stock info
+# NOTE: Formatted stock info
 """
 for key, value in stock.info.items():
      print(key, ':', value)
@@ -43,23 +43,27 @@ print(f"Volume: {stock.info['volume']}")
 
 # Not all stocks have all information
 try:
-    print(f"Diviend Yield: {stock.info['dividendYield']}")
+    print(f"Dividend Yield: {stock.info['dividendYield']}")
 except:
     print("Dividend Yield: N/A")
+
 try:
     print(f"Market Cap: {stock.info['marketCap']}")
 except:
     print("Market Cap: N/A")
+
 try:
     print(f"52 Week High: {stock.info['fiftyTwoWeekHigh']}")
     print(f"52 Week Low: {stock.info['fiftyTwoWeekLow']}")
 except:
     print("52 Week High: N/A")
     print("52 Week Low: N/A")
+
 try:
     print(f"PE Ratio: {stock.info['trailingPE']}")
 except:
     print("PE Ratio: N/A")
+
 try:
     print(f"Earnings Per Share: {stock.info['trailingEps']}")
 except:
@@ -123,15 +127,16 @@ model.add(LSTM(256,input_shape = (X_train.shape[1], 1)))
 model.add(Dense(1))
 model.compile(optimizer = 'adam', loss = 'mse')
 
-# Train the model on the training data with 10 epochs [Should be changed to 1000+ for better results]
-history = model.fit(x=X_train,y=Y_train,epochs=10,validation_data=(X_test,Y_test),shuffle=False)
+# Train the model on the training data with 30 epochs [Should be changed to 500+ for better results]
+history = model.fit(x = X_train,y = Y_train, epochs = 30, validation_data = (X_test,Y_test), shuffle = False)
 
 # Plot the loss and validation loss
 axes = plt.axes()
 axes.plot(pd.DataFrame(model.history.history)['loss'], label = 'Loss')
 axes.plot(pd.DataFrame(model.history.history)['val_loss'], label = 'Validation Loss')
 axes.legend(loc=0)
-axes.set_title('Model fitting performance')
+axes.set_title('Model Fitting Performance')
+plt.show()
 
 # Predict the stock prices using the model
 Y_predicted=scaler.inverse_transform(model.predict(X_test))
@@ -142,17 +147,33 @@ axes=plt.axes()
 axes.plot(Y_true, label='True Y')
 axes.plot(Y_predicted, label='Predicted Y')
 axes.legend(loc=0)
-axes.set_title('Prediction adjustment')
+axes.set_title('Prediction Adjustment')
+plt.show()
 
 # Calculate the metrics for the model
-print("")
-print("Overall Model Performance:")
-print("Mean Absolute Error:", metrics.mean_absolute_error(Y_true, Y_predicted))
-print("Mean Squared Error:", metrics.mean_squared_error(Y_true, Y_predicted))
-print("Root Mean Squared Error:", np.sqrt(metrics.mean_squared_error(Y_true, Y_predicted)))
-print("R2 Score:", metrics.r2_score(Y_true, Y_predicted))
-print("------------------")
-print("Model Accuracy:")
-Y_predicted = scaler.inverse_transform(model.predict(X_train))
-Y_true = scaler.inverse_transform(Y_train.reshape(Y_train.shape[0], 1))
-print((1 - (metrics.mean_absolute_error(Y_true, Y_predicted) / Y_true.mean())) * 100)
+Y_predicted = scaler.inverse_transform(model.predict(X_test))
+Y_true = scaler.inverse_transform(Y_test.reshape(Y_test.shape[0], 1))
+print()
+print("Mean Absolute Error: {:.2f}".format(metrics.mean_absolute_error(Y_true, Y_predicted)))
+print("Mean Squared Error: {:.2f}".format(metrics.mean_squared_error(Y_true, Y_predicted)))
+print("Root Mean Squared Error: {:.2f}".format(np.sqrt(metrics.mean_squared_error(Y_true, Y_predicted))))
+print("R2 Score: {:.2f}".format(metrics.r2_score(Y_true, Y_predicted)))
+print()
+
+# Calculate the model accuracy, precision, recall, and F1 score
+print("Accuracy: {:.2f}".format((1 - (metrics.mean_absolute_error(Y_true, Y_predicted) / Y_true.mean())) * 100))
+print("Precision: {:.2f}".format((1 - (metrics.mean_squared_error(Y_true, Y_predicted) / Y_true.mean())) * 100))
+print("Recall: {:.2f}".format((1 - (np.sqrt(metrics.mean_squared_error(Y_true, Y_predicted)) / Y_true.mean()) * 100)))
+print("F1 Score: {:.2f}".format((1 - (metrics.r2_score(Y_true, Y_predicted) / Y_true.mean()) * 100)))
+print()
+
+# Save the model
+model.save("neurostock_forecast.keras")
+
+# Load the model
+try:
+    model = tf.keras.models.load_model("neurostock_forecast.keras")
+    print("Model loaded successfully.")
+except:
+    print("Model could not be loaded.")
+    
