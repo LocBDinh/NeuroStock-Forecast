@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +8,7 @@
     <title>NeuroStock Forecast</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
 </head>
+
 <body>
 
     <h1>NeuroStock Forecast</h1>
@@ -26,4 +28,22 @@
     </main>
 
 </body>
+
+</html>
+<html>
+
+<head>
+    <title>NeuroStock Forecast</title>
+</head>
+
+<body>
+    <h1>NeuroStock Model Predictions Template Page</h1>
+    <form>
+        <textarea name="ticker" rows="10" cols="30">
+            {{ ticker }}
+        </textarea>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
 </html>
