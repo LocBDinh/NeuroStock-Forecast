@@ -1,8 +1,9 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS, cross_origin
 from keras.models import load_model
 import yfinance as yf
 import tensorflow as tf
+import json
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -29,6 +30,15 @@ def stock_predictions():
     except:
         return 'Model could not be found.'
     return render_template('index.html', ticker=ticker)
+
+@app.route('/data/tickers')
+def get_tickers():
+    try:
+        with open('static/tickers.json', 'r') as file:
+            tickers_data = json.load(file)
+        return jsonify(tickers_data)
+    except FileNotFoundError:
+        return "File not found"
 
 if __name__ == '__main__':
     app.run(debug=True, host='', port=1337) # Debug mode is on and allows for reloading the server when changes are made
