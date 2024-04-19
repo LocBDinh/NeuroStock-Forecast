@@ -8,8 +8,6 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
 
 body, html{
-    height: 100%;
-    margin: 0% 10%;
     background: #262a2f;
     color: white;
     align-items: center;
