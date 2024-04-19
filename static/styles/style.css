@@ -5,8 +5,87 @@
     border: 2rem solid black;
 }
 
-body{
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
+
+body, html{
+    height: 100%;
     margin: 0px;
+    line-height: 1.8;
+}
+
+.search-box {
+    width: 600px;
+    background: #fff;
+    margin: 70px auto 0;
+    border-radius: 5px;
+}
+.row{
+    display: flex;
+    align-items: center;
+    padding:10px 20px;
+}
+input {
+    flex: 1;
+    height: 50px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 18px;
+    color: #333;
+}
+button{
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+button .fa-solid{
+    width:25px;
+    color: #555;
+    font-size: 22px;
+    cursor: pointer;
+}
+::placeholder{
+    color: #555;
+}
+.result-box {
+    max-height: 500px; /* Set the desired height for the scrollable area */
+    overflow-y: auto; /* Add vertical scrollbar if needed */
+}
+.result-box ul{
+    border-top: 1px solid #999;
+    padding: 15px 10px;
+
+}
+.result-box ul li{
+    color: #333;
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px 10px;
+    cursor: pointer;
+    margin: 0px 0px;
+    display: flex;
+}
+.result-box ul li:hover{
+    background: #e9f3ff;
+}
+.ac-ticker{
+    width: 10%;
+}
+.ac-name{
+    width:80%;
+    text-align: right;
+    opacity: 0.5;
+}
+
+.bgimg-1 {
+    background-position: center;
+    background-size: cover;
+    background-image: url("https://g.foolcdn.com/editorial/images/772844/artificial-intelligence-ai-robot-big-data-bull-market-stock-chart-getty.jpg");
+    min-height: 100%;
+}
+
+.w3-bar .w3-button {
+    padding: 16px;
 }
 
 main{
@@ -41,3 +120,4 @@ h1{
 .navbar li{
     float: left;
 }
+
