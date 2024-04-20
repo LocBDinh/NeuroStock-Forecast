@@ -1,13 +1,13 @@
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import metrics
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM
+import tensorflow as tf
+from keras.models import Sequential
+from keras.layers import Dense, LSTM
 import yfinance as yf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
-import tensorflow as tf
 
 # NOTE: Formatted stock info
 """
@@ -75,7 +75,9 @@ def train_model(ticker):
     data = stock.history(period = '5y' )
     data['Close'].plot()
     plt.title(f"{ticker} Stock Prices")
-    plt.show()
+    #plt.show()
+    plt.savefig("static/icons/fiveYearPlot.svg", format="svg")
+    plt.close()
 
     # Inserts the data into a pandas dataframe
     data = yf.download(ticker)[['Adj Close']]
@@ -131,7 +133,9 @@ def train_model(ticker):
     axes.plot(pd.DataFrame(model.history.history)['val_loss'], label = 'Validation Loss')
     axes.legend(loc=0)
     axes.set_title('Model Fitting Performance')
-    plt.show()
+    #plt.show()
+    plt.savefig("static/icons/lossPlot.svg", format="svg")
+    plt.close()
 
     # Predict the stock prices using the model
     Y_predicted=scaler.inverse_transform(model.predict(X_test))
@@ -143,7 +147,9 @@ def train_model(ticker):
     axes.plot(Y_predicted, label='Predicted Y')
     axes.legend(loc=0)
     axes.set_title('Prediction Adjustment')
-    plt.show()
+    #plt.show()
+    plt.savefig("static/icons/predictionPlot.svg", format="svg")
+    plt.close()
 
     # Calculate the metrics for the model
     Y_predicted = scaler.inverse_transform(model.predict(X_test))
