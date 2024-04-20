@@ -14,7 +14,7 @@
 
     <div class="w3-top">
         <div class="w3-bar w3-white w3-card" id="myNavbar">
-          <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+          <a href="#home" class="w3-bar-item w3-button w3-wide">NEUROSTOCK</a>
           <!-- Right-sided navbar links -->
           <div class="w3-right w3-hide-small">
             <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
@@ -44,22 +44,60 @@
 <div class="w3-container w3-light-grey" style="padding:64px 16px" id="predictions">
     <h3>Enter a ticker to view predictions and price trends</h3>
         <div class="search-box">
+
             <div class="row">
                 <input type="text" id="input-box" placeholder="Search a Ticker"
                 autocomplete="off">
-                <button id="searchTicker"><img src="{{ url_for('static', filename='icons/search_icon.svg') }}" 
+                <button class="w3-button w3-hover-opacity-off" id="searchTicker"><img src="{{ url_for('static', filename='icons/search_icon.svg') }}" 
                     class="fa-solid fa-magnifying-glass"></img></button>
             </div>
+
             <div class="result-box">
                 <script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
             </div>
+            
         </div>
         <script src="{{ url_for('static', filename='js/buttonClicked.js') }}"></script>
     </div>
   </div>
 
+  <!-- Plot Section -->
+  <div class="w3-container" style="padding:32px 32px">
+    <h3 class="w3-center">PLOTS</h3>
+        <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+    
+            <div class="w3-col l3 m6 w3-margin-bottom">
+                <div class="w3-card">
+                <img src="{{ url_for('static', filename='icons/fiveYearPlot.svg') }}" alt="5plot" style="width:100%">
+                    <div class="w3-container">
+                    <h3>5 Year</h3>
+                    </div>
+                </div>
+            </div>
+      
+            <div class="w3-col l3 m6 w3-margin-bottom">
+              <div class="w3-card">
+              <img src="{{ url_for('static', filename='icons/lossPlot.svg') }}" alt="5plot" style="width:100%">
+                  <div class="w3-container">
+                  <h3>Loss</h3>
+                  </div>
+              </div>
+          </div>
+
+          <div class="w3-col l3 m6 w3-margin-bottom">
+            <div class="w3-card">
+            <img src="{{ url_for('static', filename='icons/predictionPlot.svg') }}" alt="5plot" style="width:100%">
+                <div class="w3-container">
+                <h3>Prediction</h3>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+  </div>
+
     <!-- About Section -->
-<div class="w3-container" style="padding:128px 16px" id="about">
+<!--div class="w3-container" style="padding:128px 16px" id="about">
     <h3 class="w3-center">ABOUT THE COMPANY</h3>
     <p class="w3-center w3-large">Key features of our company</p>
     <div class="w3-row-padding w3-center" style="margin-top:64px">
@@ -79,7 +117,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
       </div>
     </div>
-  </div>
+  </div-->
 
     <!-- Team Section -->
     <div class="w3-container" style="padding:128px 32px" id="team">
@@ -89,33 +127,33 @@
     
             <div class="w3-col l3 m6 w3-margin-bottom">
                 <div class="w3-card">
-                <img src="/w3images/team2.jpg" alt="John" style="width:100%">
+                <img src="{{ url_for('static', filename='icons/jy.jpg') }}" alt="John" style="width:100%">
                     <div class="w3-container">
                     <h3>Jereme Yang</h3>
-                    <p class="w3-opacity">Teammate 1</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <p class="w3-opacity"></p>
+                    <p></p>
                     </div>
                 </div>
             </div>
       
             <div class="w3-col l3 m6 w3-margin-bottom">
                 <div class="w3-card">
-                <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+                <img src="{{ url_for('static', filename='icons/ld.jpg') }}" alt="Jane" style="width:100%">
                     <div class="w3-container">
                     <h3>Loc Dinh</h3>
-                    <p class="w3-opacity">Teammate 2</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <p class="w3-opacity"></p>
+                    <p></p>
                     </div>
                 </div>
             </div>
       
       <div class="w3-col l3 m6 w3-margin-bottom">
         <div class="w3-card">
-          <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
+          <img src="{{ url_for('static', filename='icons/es.jpg') }}" alt="Mike" style="width:100%">
           <div class="w3-container">
             <h3>Edwin Salcedo</h3>
-            <p class="w3-opacity">Teammate 3</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+            <p class="w3-opacity"></p>
+            <p></p>
           </div>
         </div>
       </div>
@@ -127,7 +165,7 @@
 
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-64">
-        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+        <a href="#home" class="w3-button w3-light-grey">To the top</a>
     </footer>
 
 </body>
