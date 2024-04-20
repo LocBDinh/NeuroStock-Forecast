@@ -76,6 +76,7 @@ def train_model(ticker):
     data['Close'].plot()
     plt.title(f"{ticker} Stock Prices")
     plt.show()
+    plt.savefig("static/icons/stockPrices.svg", format="svg")
 
     # Inserts the data into a pandas dataframe
     data = yf.download(ticker)[['Adj Close']]
@@ -132,6 +133,7 @@ def train_model(ticker):
     axes.legend(loc=0)
     axes.set_title('Model Fitting Performance')
     plt.show()
+    plt.savefig("static/icons/modelFit.svg", format="svg")
 
     # Predict the stock prices using the model
     Y_predicted=scaler.inverse_transform(model.predict(X_test))
@@ -144,6 +146,7 @@ def train_model(ticker):
     axes.legend(loc=0)
     axes.set_title('Prediction Adjustment')
     plt.show()
+    plt.savefig("static/icons/predictionPlot.svg", format="svg")
 
     # Calculate the metrics for the model
     Y_predicted = scaler.inverse_transform(model.predict(X_test))
