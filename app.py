@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS, cross_origin
 from keras.models import load_model
+from model import train_model
 import yfinance as yf
 import tensorflow as tf
 import json
@@ -24,12 +25,17 @@ def status():
 @cross_origin()
 def stock_predictions():
     try:
-        # NOTE: Need to tokenize the ticker input and call the model
-        ticker = request.form.get['ticker']
-        stock = yf.Ticker(ticker)
-    except:
-        return 'Model could not be found.'
-    return render_template('index.html', ticker=ticker)
+        # Retrieve the ticker input from the request
+        ticker = request.form.get('ticker')
+        if not ticker:
+            return 'Ticker not provided.'
+        print(f" Your Stock Ticker is: {ticker}")
+        # Train model using given ticker
+        stock_predictions = train_model(ticker)
+        # Return the result to the client
+        return render_template('predictions.html', stock_predictions=stock_predictions)
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
 
 @app.route('/data/tickers')
 def get_tickers():
