@@ -27,6 +27,10 @@ const resultsBox = document.querySelector('.result-box');
                         }
                     };
             
+                    /**
+                     * Display the autocomplete results in the results box.
+                     * @param {Array} result - The array of autocomplete results.
+                     */
                     function display(result) {
                         const content = result.map((list) => {
                             return "<li onclick=selectInput(this)>" +
